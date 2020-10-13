@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 1021, y: 272}
   m_MaxSize: {x: 26016, y: 10022}
   vertical: 0
-  controlID: 153
+  controlID: 55
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -614,7 +614,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5ef8ffff96f8ffff34f9ffff6efbffff
+      m_ExpandedIDs: 4afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -703,19 +703,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Ms\Desktop\CoffeeOrder
+  m_LastProjectPath: C:\Users\Ms\Documents\GitHub\CoffeeOrder
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6a300000
-    m_LastClickedID: 12394
+    m_SelectedIDs: c22c0000
+    m_LastClickedID: 11458
     m_ExpandedIDs: 00000000c22c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
