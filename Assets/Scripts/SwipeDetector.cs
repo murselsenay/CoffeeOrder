@@ -12,6 +12,7 @@ public class SwipeDetector : MonoBehaviour
     public Text text;
     public float SWIPE_THRESHOLD = 20f;
     internal bool canSwipe = false;
+    internal bool isDone = false;
 
     // Update is called once per frame
     void Update()
@@ -21,12 +22,12 @@ public class SwipeDetector : MonoBehaviour
         {
             OnSwipeDown();
         }
-       
+
         foreach (Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
             {
-                
+
                 fingerUp = touch.position;
                 fingerDown = touch.position;
             }
@@ -34,18 +35,18 @@ public class SwipeDetector : MonoBehaviour
             //Detects Swipe while finger is still moving
             if (touch.phase == TouchPhase.Moved)
             {
-               
+
                 if (!detectSwipeOnlyAfterRelease)
                 {
                     fingerDown = touch.position;
-                    
+
                 }
             }
 
             //Detects swipe after finger is released
             if (touch.phase == TouchPhase.Ended)
             {
-               
+
                 fingerDown = touch.position;
                 checkSwipe();
             }
@@ -109,43 +110,49 @@ public class SwipeDetector : MonoBehaviour
 
     void OnSwipeDown()
     {
-        if(canSwipe)
+        if (canSwipe && !isDone)
         {
             LevelManager.instance.selectedSyrup.transform.GetChild(3).GetComponent<SyrupFlow>().StartFlowing(LevelManager.instance.selectedSyrup.GetComponent<Renderer>().material);
             StartCoroutine(PushButton());
             canSwipe = false;
+            LevelManager.instance.syrupPushCount += 1;
+            if (LevelManager.instance.CheckSyrupPushCount(LevelManager.instance.syrupPushCount))
+            {
+                LevelManager.instance.SyrupPushIsDone();
+                isDone = true;
+            }
         }
-          
+
     }
 
     void OnSwipeLeft()
     {
-      
+
     }
 
     void OnSwipeRight()
     {
-       
+
     }
 
     public IEnumerator PushButton()
     {
-     
-            while (LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position.y > 1.22f)
-            {
-                LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position += new Vector3(0f, -0.01f, 0f);
-                Debug.Log(LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position);
-                yield return new WaitForSeconds(0.03f);
-            }
 
-            while (LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position.y < 1.4f)
-            {
-                LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position += new Vector3(0f, +0.01f, 0f);
-                Debug.Log(LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position);
-                yield return new WaitForSeconds(0.03f);
-            }
-            canSwipe = true;
-       
-     
+        while (LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position.y > 1.22f)
+        {
+            LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position += new Vector3(0f, -0.01f, 0f);
+            Debug.Log(LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position);
+            yield return new WaitForSeconds(0.03f);
+        }
+
+        while (LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position.y < 1.4f)
+        {
+            LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position += new Vector3(0f, +0.01f, 0f);
+            Debug.Log(LevelManager.instance.selectedSyrup.transform.GetChild(1).GetChild(0).transform.position);
+            yield return new WaitForSeconds(0.03f);
+        }
+        canSwipe = true;
+
+
     }
 }

@@ -56,6 +56,7 @@ public class LevelManager : MonoBehaviour
     internal string targetSyrupType;
     public GameObject selectedSyrup;
     internal bool canCheckWrongSyrup = true;
+    internal int syrupPushCount = 0;
 
 
     //Menus
@@ -266,6 +267,8 @@ public class LevelManager : MonoBehaviour
             ThumbsDown();
         }
     }
+
+    
     public void IncreaseMilkPressure()
     {
         if (milkPressure <= 30f)
@@ -414,11 +417,25 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SyrupPushIsDone()
+    {
+        UpdateScore(5);
+        ThumbsUp();
+    }
+   
+    public bool CheckSyrupPushCount(int _syrupPushCount)
+    {
+        if (_syrupPushCount == 3)
+        {
+            return true;
+        }
+        return false;
+        
+    }
 
-
-        //Syrup
-        //Shot
-        public void SetShotSelection()
+    //Syrup
+    //Shot
+    public void SetShotSelection()
         {
             int rnd = Random.Range(1, touchButtons.Length);
             targetShot = rnd;
